@@ -59,10 +59,21 @@
 <body>
     <div class="container">
         <h1>Spotify Extractor</h1>
+        
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash-messages">
+              {% for message in messages %}
+                <p style="color: red; font-size: 14px;">{{ message }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
         <form action="/extract" method="post">
             <div class="form-group">
-                <label for="playlist_id">Spotify Playlist ID</label>
-                <input type="text" id="playlist_id" name="playlist_id" placeholder="Enter ID here" required>
+                <label for="playlist_id">Spotify Playlist ID or URL</label>
+                <input type="text" id="playlist_id" name="playlist_id" placeholder="Enter ID or URL here" required>
             </div>
             <button type="submit">Extract to CSV</button>
         </form>
